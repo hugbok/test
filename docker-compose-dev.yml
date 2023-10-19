@@ -1,16 +1,6 @@
 version: '3.9'
 services:
 
-
-  web:
-    volumes:
-      - ./app-web/:/code
-    build:
-      context: .
-      dockerfile: Dockerfile.web
-    ports:    
-      - "8080:80"
-
   rabbitmq:
     image: rabbitmq:3-management
     container_name: 'rabbitmq'
@@ -18,14 +8,8 @@ services:
       - '5672:5672'
       - '15672:15672'
     volumes:
-      - type: bind
-        source: ./rabbitmq/definitions.json
-        target: /etc/rabbitmq/definitions.json
-        read_only: true
-      - type: bind 
-        source: ./rabbitmq/rabbitmq.conf
-        target: /etc/rabbitmq/rabbitmq.conf
-        read_only: true
+      - /rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - /rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
 
 
-
+ 

@@ -1,0 +1,87 @@
+{
+	"exchanges": [{
+			"name": "diameter-exchange",
+			"vhost": "/",
+			"type": "direct",
+			"durable": true,
+			"auto_delete": false,
+			"internal": false,
+			"arguments": {}
+		},
+		{
+			"name": "diameter-exchange-fanout",
+			"vhost": "/",
+			"type": "fanout",
+			"durable": true,
+			"auto_delete": false,
+			"internal": false,
+			"arguments": {}
+		}
+	],
+	"queues": [{
+		"name": "process",
+		"vhost": "/",
+		"durable": true,
+		"auto_delete": false,
+		"arguments": {
+			"x-message-ttl": 5000
+		}
+	}, {
+		"name": "receive",
+		"vhost": "/",
+		"durable": true,
+		"auto_delete": false,
+		"arguments": {
+			"x-message-ttl": 5000
+		}
+	}, {
+		"name": "web",
+		"vhost": "/",
+		"durable": true,
+		"auto_delete": false,
+		"arguments": {
+			"x-message-ttl": 5000
+		}
+	}],
+	"bindings": [{
+		"source": "diameter-exchange",
+		"vhost": "/",
+		"destination": "process",
+		"destination_type": "queue",
+		"routing_key": "process",
+		"arguments": {}
+	}, {
+		"source": "diameter-exchange",
+		"vhost": "/",
+		"destination": "receive",
+		"destination_type": "queue",
+		"routing_key": "receive",
+		"arguments": {}
+	}, {
+		"source": "diameter-exchange",
+		"vhost": "/",
+		"destination": "web",
+		"destination_type": "queue",
+		"routing_key": "web",
+		"arguments": {}
+	}],
+	"users": [{
+		"name": "guest",
+		"password_hash": "BMfxN8drrYcIqXZMr+pWTpDT0nMcOagMduLX0bjr4jwud/pN",
+		"hashing_algorithm": "rabbit_password_hashing_sha256",
+		"tags": [
+			"administrator"
+		],
+		"limits": {}
+	}],
+	"vhosts": [{
+		"name": "/"
+	}],
+	"permissions": [{
+		"user": "guest",
+		"vhost": "/",
+		"configure": ".*",
+		"write": ".*",
+		"read": ".*"
+	}]
+}

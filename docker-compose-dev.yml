@@ -7,8 +7,7 @@ services:
     ports:
       - '5672:5672'
       - '15672:15672'
-    volumes:
-      - /rabbitmq:/etc/rabbitmq/ 
-
-
- 
+    volumes:      
+      - type: bind
+        source: ./rabbitmq
+        target: /etc/rabbitmq

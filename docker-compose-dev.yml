@@ -8,6 +8,9 @@ services:
       - '5672:5672'
       - '15672:15672'
     volumes:      
-      - type: bind
-        source: ./rabbitmq/
-        target: /etc/rabbitmq/
+      - type: volume
+        source: rabbitmqconf
+        target: /etc/rabbitmq
+
+volumes:
+  rabbitmqconf:

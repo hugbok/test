@@ -9,5 +9,5 @@ services:
       - '15672:15672'
     volumes:      
       - type: bind
-        source: ./rabbitmq
-        target: /etc/rabbitmq
+        source: ./rabbitmq/
+        target: /etc/rabbitmq/

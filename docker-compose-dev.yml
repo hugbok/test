@@ -11,6 +11,8 @@ services:
       - type: volume
         source: rabbitmqconf
         target: /etc/rabbitmq
+        volume: 
+          nocopy: false
 
 volumes:
   rabbitmqconf:

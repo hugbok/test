@@ -4,12 +4,8 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: 'rabbitmq'
+    volumes:
+      - ./rabbitmq/:/etc/rabbitmq/:ro
     ports:
       - '5672:5672'
       - '15672:15672'
-    volumes:      
-      - type: volume
-        source: ./rabbitmqconf
-        target: /etc/rabbitmq
-        volume: 
-          nocopy: false
